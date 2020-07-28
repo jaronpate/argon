@@ -1,6 +1,5 @@
 exports.owners = ['426147523305144322', '159126685759832065']
 exports.invite = 'https://discord.gg/7JceW7S'
-// exports.db = 'mongodb+srv://soul:RvENGEXYZ1@soul-rwn8i.mongodb.net/Argon?retryWrites=true&w=majority'
 exports.db = process.env.botDatabase
 exports.prefix = '$'
 
