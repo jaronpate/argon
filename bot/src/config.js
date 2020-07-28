@@ -4,7 +4,6 @@ exports.db = process.env.botDatabase
 exports.prefix = '$'
 
 exports.tokens = {
-   // bot: 'NjY2ODE3MTg5MzEwODkwMDE0.XtxHnQ.TOT0ORcy2U7zrB0qnzIFmTw7dXA'
    bot: process.env.botToken
 }
 
