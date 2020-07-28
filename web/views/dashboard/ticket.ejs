@@ -1,0 +1,102 @@
+<%- include("../partials/header.ejs") %>
+<%- include("../partials/guildheader.ejs") %>
+<div class="container main">
+
+   <div class="category">
+      <div class="categoryWrapper">
+         <h4 class="categoryTitle"><%- ticket.tag -%> - Ticket (<%- ticket.id -%>)</h4>
+         <div class="categoryWrapperSettings">
+            <table class="ui very basic inverted table">
+               <thead>
+                  <tr>
+                     <th>Ticket Owner</th>
+                     <th>Discord ID</th>
+                     <th>Status</th>
+                     <th>Opened</th>
+                     <th>Resolved</th>
+                     <th>Messages</th>
+                  </tr>
+               </thead>
+               <tbody>
+                  <tr>
+                     <td><%- ticket.username -%></td>
+                     <td><%- ticket.user -%></td>
+                     <td><%- ticket.resolved ? "Closed" : "Open" -%></td>
+                     <td><span class="timestamp"><%- new Date(ticket.createdTimestamp).toUTCString() -%></span></td>
+                     <td>
+                        <span class="<%- ticket.resolvedTimestamp ? "timestamp" : "" -%>">
+                           <%- ticket.resolvedTimestamp ? new Date(ticket.resolvedTimestamp).toUTCString() : "N/A" -%>
+                        </span>
+                     </td>
+                     <td><%- ticket.log ? ticket.log.length : "None" -%></td>
+                  </tr>
+               </tbody>
+            </table>
+         </div>
+      </div>
+   </div>
+
+
+   <script>
+      let times = document.querySelectorAll(".timestamp");
+      times.forEach(e => {
+         let date = new Date(e.innerHTML);
+         e.innerHTML = date.toLocaleString();
+      });
+   </script>
+   <% if (ticket.log) { %>
+
+   <div class="category">
+      <div class="categoryWrapper">
+         <h4 class="categoryTitle">Message Log</h4>
+         <div class="categoryWrapperSettings scrollbar" style="max-height: 350px; overflow: auto;">
+            <div class="ui comments">
+               <% ticket.log.reverse().forEach(msg => { %>
+               <div class="comment">
+                  <a class="avatar">
+                     <img src="<%- msg.author.avatar.replace('.webp', '.png') -%>">
+                  </a>
+                  <div class="content">
+                     <a class="author"><%- msg.author.username -%></a>
+                     <div class="text">
+                        <%- msg.content -%>
+                        <% if(msg.embeds.length > 0){ %>
+                        <div class="wrapper">
+                           <div class="side-colored" style="background: #<%- msg.embeds[0].color.toString(16); -%>;">
+                           </div>
+                           <div class="embed">
+                              <div class="card-block">
+                                 <div class="embed-inner">
+                                    <div class="embed-title"><%- msg.embeds[0].title -%></div>
+                                    <div class="embed-description"><%- msg.embeds[0].description -%></div>
+                                    <% if ( msg.embeds[0].fields.length > 0) { %>
+
+                                    <div class="fields">
+                                       <% msg.embeds[0].fields.forEach(field => { %>
+                                       <div class="field <%- field.inline ? "inline":"false" -%>">
+                                          <div class="field-name"><%- field.name -%></div>
+                                          <div class="field-value"><%- field.value -%></div>
+                                       </div>
+                                       <% }); %>
+                                    </div>
+
+                                    <% } %>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                        <% } %>
+                     </div>
+                  </div>
+               </div>
+               <% }); %>
+            </div>
+         </div>
+      </div>
+   </div>
+
+   <% } %>
+
+</div>
+
+<%- include("../partials/footer.ejs") %>

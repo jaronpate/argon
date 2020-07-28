@@ -1,0 +1,97 @@
+.channel{
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    margin-right: -3px;
+    width: 25%;
+    z-index: 1 !important;
+}
+
+.channel .text{
+    color: white !important;
+}
+
+.message{
+    border-top-left-radius: 0 !important;
+    border-bottom-left-radius: 0 !important;
+    margin-left: -3px;
+    width: 75%
+}
+
+.addRole{
+    margin: 0 5px;
+    cursor: pointer;
+}
+
+#welcomeMsgInput{
+    width: 80%;
+}
+
+#channelSelect{
+    width: 25%;
+    min-width: 8em;
+}
+
+#roleSelect{
+    width: 100%;
+}
+
+#roleSelect .menu{
+    border: none;
+}
+
+.menu .message{
+    color: white !important;
+}
+
+.dropdown{
+    color: white !important;
+}
+
+.delete{
+    margin: auto 0 auto 5px !important;
+    font-size: 0.8em !important;
+    cursor: pointer !important;
+    color: white;
+}
+
+.delete:hover{
+    color: var(--brand-primary) !important;
+}
+
+.delete::before {
+    vertical-align: text-bottom;
+}
+
+.label{
+    border: 1px solid white !important;
+    border-radius: 15px;
+    color: white;
+}
+
+.label:hover{
+    color: white;
+}
+
+div .menu{
+    background-color: var(--background-secondary) !important;
+    border-color: var(--background-tertiary) !important;
+    color: white;
+}
+
+.item{
+    border-color: var(--background-tertiary) !important;
+    color: white !important;
+    font-size: 1em !important;
+}
+
+div .menu::-webkit-scrollbar {
+    background-color: var(--background-tertiary);
+    border-radius: 10px;
+    width: 7px;
+    padding: 2px 4px;
+    display: none;
+}
+
+.ui.selection.visible.dropdown>.text:not(.default)  {
+    color: white;
+}

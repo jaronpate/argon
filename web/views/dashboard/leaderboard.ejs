@@ -1,0 +1,35 @@
+<%- include("../partials/header.ejs") %>
+<%- include("../partials/guildheader.ejs") %>
+<div class="container main">
+    <form method="POST" action="/dashboard/<%-guild.id%>/leaderboard" id="guildForm">
+        <div class="settingWrapper">
+            <div class="settingTitle">
+                <h4>Leaderboard</h4>
+                <p class="info">Reward members for activity in your server.</p>
+            </div>
+            <div class="settings">
+                <a id="viewLeaderboard" href="/leaderboards/<%-guild.id-%>">View Leaderboard</a>
+            </div>
+        </div>
+
+        <div class="settingWrapper">
+            <div class="settingTitle">
+                <h4>Vanity URL</h4>
+                <p class="info">Create a custom link to your leaderboard.</p>
+            </div>
+            <div class="settings">
+
+
+                <div class="urlPlaceholder">
+                    <span> argon.wtf/ </span>
+                    <input type="text" name="settings[leaderboardVanityURL]" placeholder="custom"
+                        data-inital="<%-guild ? guild.settings.leaderboardVanityURL : "$"-%>"
+                        value="<%-guild ? guild.settings.leaderboardVanityURL : "$"-%>"> </div>
+            </div>
+        </div>
+
+        <button type="submit">Save settings</button>
+    </form>
+</div>
+
+<%- include("../partials/footer.ejs") %>

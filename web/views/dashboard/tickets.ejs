@@ -1,0 +1,31 @@
+<%- include("../partials/header.ejs") %>
+<%- include("../partials/guildheader.ejs") %>
+<div class="container main">
+   <table class="ui selectable inverted black table">
+      <thead>
+         <tr>
+            <th>ID</th>
+            <th>User</th>
+            <!-- <th>Notes</th> -->
+            <th>Preview</th>
+            <th>Log</th>
+         </tr>
+      </thead>
+      <tbody>
+         <% tickets.forEach(t => { %>
+         <tr>
+            <td><a href="/dashboard/<%-guild.id-%>/tickets/<%-t.id-%>"><%-t.id-%></a></td>
+            <td><%-t.tag-%></td>
+            <!-- <td><%-t.notes ? t.notes : "None"-%></td> -->
+            <td><%-t.log ? t.log.reverse()[1].content.substring(0, 45) + "..." : "None"-%></td>
+            <td><%-t.log ? `${t.log.length} messages` : "None"-%></td>
+         </tr>
+         <% }) %>
+      </tbody>
+   </table>
+   <% if (tickets.length === 0) { %>
+   <p style="text-align: center;">No tickets found.</p>
+   <% } %>
+</div>
+
+<%- include("../partials/footer.ejs") %>

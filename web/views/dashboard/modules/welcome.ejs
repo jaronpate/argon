@@ -1,0 +1,105 @@
+<%- include("../../partials/header.ejs") %>
+<%- include("../../partials/guildheader.ejs") %>
+<div class="container main">
+    <form method="POST" action="/dashboard/<%-guild.id%>/welcome">
+
+        <div class="row">
+            <div class="twelve columns">
+
+                <div class="settingWrapper">
+                    <div class="settingTitle">
+                        <h4>Welcome Message</h4>
+                        <p>
+                            Send a message when a user joins the server.
+                        </p>
+                    </div>
+                    <div class="settings" id="channelSelectWrapper">
+                        <select class="channel" id="channel"
+                            data-inital="<%- (guild.settings.channels.welcome) ? guild.settings.channels.welcome : null -%>"
+                            name="settings[welcomeChannel]">
+                            <option value="null" selected> None </option>
+                            <% channels.forEach(c => { %>
+                            <% if(guild.settings.channels.welcome !== null && guild.settings.channels.welcome === c.id){ %>
+                            <option value="<%-c.id%>" selected> <%-c.name%> </option>
+                            <% } else { %>
+                            <option value="<%-c.id%>"> <%-c.name%> </option>
+                            <% } %>
+                            <% }) %>
+                        </select>
+
+                        <script>
+                            $('#channel')
+                                .dropdown();
+                        </script>
+
+                        <div class="ui input" id="welcomeMsgInput">
+                            <input class="message" type="text" style="margin: 0; width: 100%;"
+                                data-inital="<%- guild.settings ? guild.settings.messages.welcome : "" -%>"
+                                name="settings[welcomeMsg]"
+                                value="<%-guild.settings.messages ? guild.settings.messages.welcome : ""-%>"
+                                placeholder="Welcome to Argon's Hub {user}!">
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="twelve columns">
+                <div class="settingWrapper">
+                    <div class="settingTitle">
+                        <h4>Auto Role</h4>
+                        <p class="info">Automatically assign roles to users when they join.</p>
+                    </div>
+                    <div class="settings" id="roleSelectWrapper">
+                        <select class="ui search dropdown" multiple="" name="settings[autoRole]"
+                            data-inital="<%- guild.settings.roles.autoRole -%>" id="roleDropdown">
+                            <% roles.forEach(r => { %>
+                            <% if(r.name !== "@everyone"){ %>
+                            <% if(guild.settings.roles.autorole !== null && guild.settings.roles.autorole.includes(r.id)){ %>
+                            <option value="<%-r.id%>" selected> <%-r.name%> </option>
+                            <% } else {%>
+                            <option value="<%-r.id%>"> <%-r.name%> </option>
+                            <% } %>
+                            <% } %>
+                            <% }) %>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <button type="submit">Save settings</button>
+    </form>
+</div>
+
+<script>
+    $('#roleDropdown')
+        .dropdown();
+    $('#roleSelectWrapper div.dropdown').attr('id', 'roleSelect');
+    $('#channelSelectWrapper div.dropdown').attr('id', 'channelSelect');
+
+    function compare(arr1, arr2) {
+        if (JSON.stringify(arr1) == JSON.stringify(arr2)) {
+            return true;
+        }
+        else
+            return false;
+    }
+
+    var inital = document.getElementById("roleDropdown").getAttribute("data-inital")
+    var inital = inital.split(",");
+    $("#roleDropdown").change((e) => {
+
+        var currentVal = $(e.currentTarget).val();
+
+        if (compare(inital, currentVal)) {
+            saveDialog.classList.remove("shown");
+        } else {
+            saveDialog.classList.add("shown");
+        }
+    });
+</script>
+
+<%- include("../../partials/footer.ejs") %>

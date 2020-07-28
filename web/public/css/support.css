@@ -1,0 +1,114 @@
+.value-img{
+    font-size: 900%;
+    margin-bottom: 10px;
+}
+
+.jumbo{
+    width: 100%;
+    padding: 50px 0;
+    background-color: var(--background-secondary);
+}
+
+.jumbo .row{
+    margin: auto 20%;
+    padding: 30px 0;
+    display: flex;
+    align-content: center;
+    justify-content: center;
+}
+
+.modalButton{
+    width: 70%;
+    font-size: 1.5em;
+    margin: 10px auto;
+    cursor: pointer;
+}
+
+.buttons{
+    margin: 50px auto;
+}
+
+.buttons a{
+    margin: auto 5px;
+}
+
+.invite, .discord, .dashboard{
+    padding: 7px 25px;
+    border-radius: 3px;
+    transition: background-color linear .15s, border-color linear .15s;
+    text-decoration: none;
+}
+
+.invite, .discord{
+    color: white;
+    background-color: #43b581;
+}
+
+.dashboard{
+    color: white;
+    background-color: var(--brand-primary);
+}
+
+.dashboard:hover {
+	color: #cccccc;
+}
+
+.invite:hover, .discord:hover{
+    /* color: #43b581; */
+    color: #cccccc;
+    background-color: #269261;
+    border-color: #269261;
+}
+
+#blurb{
+    margin: auto;
+}
+
+#bot-pic{
+    /* height: 256px;
+    width: 256px; */
+    height: 128px;
+    width: 128px;
+    margin: auto;
+    margin-bottom: 30px;
+    background-image: url("/assets/branding/white-text-only.png");
+    background-position: center;
+    background-size: cover;
+    /* border-radius: 50%; */
+}
+
+.box{
+    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.6);
+    background-color: var(--background-secondary);
+    display: flex !important;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    transition-duration: 0.2s;
+    transition-property: transform, box-shadow, background-color;
+    border-radius: 10px;
+    margin-bottom: 25px;
+    padding: 15px 25px;
+    color: white !important;
+    text-decoration: none;
+  }
+  
+  .box span{
+    display: block;
+    font-size: 2.3rem;
+    font-weight: bold;
+  }
+  
+  .box i{
+    margin-top: 25px;
+    font-size: 4em;
+  }
+  
+  .box p{
+    padding: 0 10px;
+  }
+  
+  .box:hover {
+    transform: translate(0, -3px);
+    box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.8);
+  }

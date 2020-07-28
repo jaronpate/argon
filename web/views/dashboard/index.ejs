@@ -1,0 +1,49 @@
+<%- include("../partials/header.ejs") %>
+<script>
+    function acr(str){
+        return str.split(/\b(?=[a-z]|["'"])/ig) // split on word boundaries
+        .map( token => token[0] )         // get first letter of each token
+        .join( '' ).toLowerCase()         // convert to lowercase string
+    }
+    function canvas(c, gName){
+        var ctx = c.getContext("2d");
+        ctx.arc(64, 64, 62, 0, 64);
+        ctx.fillStyle = "#111111"
+        ctx.fill()
+        ctx.font = "30px Arial";
+        ctx.fillStyle = "white"
+        let acrFunction = acr(gName)
+        ctx.textAlign = "center"
+        ctx.fillText(acrFunction, "64", "74");
+    }
+</script>
+
+<div class="content container dash text-center">
+    <ul id="guildIcons">
+        <% let guildSize = 0; %>
+        <% for(let i = 0; i < guilds.length; i++) { %>
+            <% if(guilds[i].owner || (guilds[i].permissions & 0x20) == 0x20){ %>
+                <% guildSize++ %>
+                <li class="tooltip">
+                    <a draggable="false" href="/dashboard/<%-guilds[i].id%>">
+                        <% if(guilds[i].icon !== null){ %>
+                        <img class="guildIcon" draggable="false" src="https://cdn.discordapp.com/icons/<%-guilds[i].id%>/<%-guilds[i].icon%>?size=2048">
+                        <% } else { %>
+                        <div class="missingGuild" id="missingGuildText-<%-guilds[i].id-%>"></div>
+                        <script>
+                        $(window).on("load", (e) => {
+                            document.getElementById("missingGuildText-<%- guilds[i].id -%>").innerText = acr("<%- guilds[i].name.replace(/["'"]/g, "\$&").replace(/["`"]/g, "\\$&") -%>");
+                        });
+                        </script>
+                        <% } %>
+                        <span class="tooltiptext"><%-guilds[i].name%></span>
+                    </a>
+                </li>
+            <% } %> 
+        <% } %>
+        <% if(guildSize === 0) { %>
+            <p>You don't have any guilds mate</p>
+        <% } %>
+    </ul>
+</div>
+<%- include("../partials/footer.ejs") %>

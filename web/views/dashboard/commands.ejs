@@ -1,0 +1,48 @@
+<%- include("../partials/header.ejs") %>
+<%- include("../partials/guildheader.ejs") %>
+<div class="content container">
+    <form method="POST" action="/dashboard/<%-guild.id%>/commands">
+        <div>
+            <div class="category">
+                <div class="categoryWrapper">
+                    <h4 class="categoryTitle">Commands</h4>
+                    <div class="categoryWrapperSettings">
+                        <p style="margin-bottom: 5px; margin-left: 15px; opacity: 0.7;">Enable/disable commands in your
+                            server.</p>
+                    </div>
+                </div>
+            </div>
+
+            <% categories.forEach((category) => { %>
+            <div class="category">
+                <div class="categoryWrapper">
+                    <h4 class="categoryTitle"><%- category[0].category -%></h4>
+                    <div class="categoryWrapperSettings">
+
+                        <% category.forEach((command) => { %>
+                        <% if(!command.name) return; %>
+                        <div class="card">
+                            <div class="cardTitle">
+                                <label for="<%- command.name -%>">
+                                    <h5><%- command.name -%></h5>
+                                </label>
+
+                                <label class="commandToggle switch" for="<%- command.name -%>">
+                                    <input type="checkbox" name="commands[<%- command.name -%>]"
+                                        id="<%- command.name -%>" <%- (command.enabled) ? "checked" : "" -%>>
+                                    <span class="slider round"></span>
+                                </label>
+                            </div>
+                            <p><%- command.description -%></p>
+                        </div>
+                        <% }) %>
+
+                    </div>
+                </div>
+                <% }) %>
+            </div>
+        </div>
+        <button>Save Settings</button>
+    </form>
+</div>
+<%- include("../partials/footer.ejs") %>

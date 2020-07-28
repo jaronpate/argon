@@ -1,0 +1,23 @@
+<%- include("../../partials/header.ejs") %>
+<%- include("../../partials/guildheader.ejs") %>
+<div class="container main">
+    <form method="POST" action="/dashboard/<%-guild.id%>/levels">
+        <div class="settingWrapper">
+            <div class="settingTitle">
+                <h4>Level Up Message</h4>
+                <p class="info">Disable the level message if your server.</p>
+            </div>
+            <div class="settings">
+                <label class="switch">
+                    <input type="checkbox" name="settings[rankup]" data-inital="<%- (guild.settings.toggles.rankup) -%>"
+                        <%- (guild.settings.toggles.rankup === true) ? "checked" : " " -%>>
+                    <span class="slider round"></span>
+                </label>
+            </div>
+        </div>
+
+        <input type="checkbox" name="settings[ignore]" style="display: none;" checked>
+        <button type="submit">Save settings</button>
+    </form>
+</div>
+<%- include("../../partials/footer.ejs") %>

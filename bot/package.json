@@ -1,0 +1,21 @@
+{
+   "name": "argon1",
+   "version": "1.0.0",
+   "main": "src/Sharding.js",
+   "license": "MIT",
+   "dependencies": {
+      "body-parser": "^1.19.0",
+      "canvas": "^2.6.1",
+      "canvas-constructor": "^3.2.0",
+      "d3-format": "^1.4.4",
+      "discord.js": "github:discordjs/discord.js#fe7df70",
+      "dotenv": "^8.2.0",
+      "express": "^4.17.1",
+      "hypixel-api-nodejs": "^0.1.5",
+      "klasa": "github:dirigeants/klasa#settings",
+      "klasa-member-gateway": "github:dirigeants/klasa-member-gateway#settings",
+      "moment": "^2.26.0",
+      "mongodb": "^3.5.8",
+      "util": "^0.12.3"
+   }
+}

@@ -1,0 +1,334 @@
+.profile{
+  margin: 100px 25px 0px 25px !important;
+}
+
+.card h6, .profileCard h6{
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.profileCard {
+    background-color: var(--background-tertiary);
+    border-radius: 10px;
+    width: 80%;
+    margin: auto;
+    margin-bottom: 25px;
+    padding: 25px 10px;
+}
+
+.profileCard img {
+    border-radius: 50%;
+    /* min-height: 128px; */
+    max-width: 128px;
+    width: 100%;
+}
+
+.profileInfo{
+    padding-top: 10px;
+}
+
+.editProfile button{
+  font-size: 0.6em !important;
+  padding: 5px 10px !important;
+  font-weight: 400 !important;
+  height: auto !important;
+  margin: 10px auto 0 auto !important;
+}
+
+#profileModal .description{
+  /* display: flex;
+  justify-content: center;
+  align-items: center; */
+  text-align: center;
+}
+
+#profileModal .description div{
+  display: inline;
+}
+
+#profileModal .description label{
+  font-weight: 400;
+}
+
+#profileModal h6{
+  font-weight: 400;
+}
+
+#profileModal form{
+  margin: 0;
+}
+
+#profileModal textarea{
+  background-color: var(--background-secondary);
+  border-color: var(--background-secondary);
+  min-width: 80%;
+  max-width: 90%;
+  min-height: 200px;
+}
+
+.mediaPlaceholder{
+  display: flex;
+  justify-content: center;
+  align-items: baseline;
+  background-color: var(--background-secondary);
+}
+
+.mediaPlaceholder input{
+  width: 50%;
+}
+
+.card{
+    background-color: var(--background-tertiary);
+    border-radius: 10px;
+    width: 80%;
+    margin: auto;
+    margin-bottom: 25px;
+    padding: 25px 10px;
+}
+
+.info{
+  padding: 5px 0px;
+  opacity: 0.4;
+  font-weight: 300;
+  font-size: 0.9em;
+}
+
+.badges{
+    padding: 5px 10px;
+    margin-bottom: 10px;
+}
+
+.badges i{
+    font-size: 2em;
+}
+
+.scroll{
+    max-height: 70vh;
+    overflow: auto;
+}
+
+h6{
+    font-size: 1.2em;
+}
+
+.commandList{
+    list-style: none;
+    margin: 0;
+}
+
+.command {
+    display: block;
+    padding: 5px 10px;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.command:not(:last-child){
+    border-bottom: 3px solid rgb(10, 10, 10);
+}
+
+.commandDate, .commandTime{
+    opacity: 0.6;
+}
+
+.stickyTitle{
+    /* border-bottom: 3px solid rgb(10, 10, 10); */
+    margin-bottom: 0 !important;
+    padding: 0px 0px 15px 0px;
+}
+
+.scrollbar::-webkit-scrollbar {
+    background-color: var(--background-secondary);
+    border-radius: 15px;
+    width: 7px;
+    padding: 2px 4px;
+}
+
+.scrollbar::-webkit-scrollbar-thumb {
+    background-color: rgb(6, 6, 6);
+    border-radius: 25px;
+    width: 7px;
+    cursor: pointer;
+}
+    
+    
+.tooltip {
+  position: relative;
+  display: inline;
+  transition: background-color 0.2s;
+}
+
+.tooltip a {
+  color: white;
+}
+
+/* Tooltip text */
+.tooltip .tooltiptext {
+  opacity: 0;
+  width: 120px;
+  background-color: rgba(255,255,255, 0.3);
+  -webkit-backdrop-filter: blur(3px);
+  backdrop-filter: blur(3px);
+  color: #fff;
+  text-align: center;
+  padding: 5px 0;
+  border-radius: 6px;
+  font-weight: 300;
+  position: absolute;
+  width: 120px;
+  top: -200%;
+  left: 50%;
+  margin-left: -60px;
+  z-index: 1;
+  transition: opacity ease-in 0.2s;
+}
+
+.tooltip .tooltiptext::after {
+  content: " ";
+  position: absolute;
+  top: 100%; /* At the top of the tooltip */
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  -webkit-backdrop-filter: blur(3px);
+  backdrop-filter: blur(3px);
+  border-color: transparent transparent rgba(255,255,255, 0.3) transparent;
+  transform: rotate(180deg);
+}
+
+/* Show the tooltip text when you mouse over the tooltip container */
+.tooltip:hover .tooltiptext {
+  opacity: 1;
+}
+
+
+.badgetooltip {
+  position: relative;
+  display: inline-block;
+  margin: 5px;
+}
+
+.badgetooltip a {
+  color: white;
+}
+
+/* Tooltip text */
+.badgetooltip .badgetooltiptext {
+  visibility: hidden;
+  width: 120px;
+  background-color: var(--background-secondary);
+  color: #fff;
+  text-align: center;
+  padding: 5px 0;
+  border-radius: 6px;
+
+  /* Position the tooltip text - see examples below! */
+  position: absolute;
+  width: 120px;
+  top: 120%;
+  left: 50%;
+  margin-left: -60px;
+  z-index: 1;
+}
+
+.badgetooltip .badgetooltiptext::after {
+  content: " ";
+  position: absolute;
+  bottom: 100%; /* At the top of the tooltip */
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: transparent transparent var(--background-secondary) transparent;
+}
+
+/* Show the tooltip text when you mouse over the tooltip container */
+.badgetooltip:hover .badgetooltiptext {
+  visibility: visible;
+}
+
+#profileDesc img{
+  max-width: 40%;
+}
+
+@media only screen and (min-width: 767px){
+  #profileModal{
+    width: 80%;
+  }
+}
+
+.level-progress-wrapper{
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.level-progress-wrapper div{
+  position: absolute;
+}
+
+.level-progress-wrapper h5{
+  text-transform: uppercase;
+  margin: 0;
+  font-size: 1em;
+}
+
+.progress-ring__circle {
+  transform: rotate(-90deg);
+  transform-origin: 50% 50%;
+  stroke-linecap: round;
+}
+
+.animate__circle{
+  transition: 0.65s stroke-dashoffset ease-in-out;
+}
+
+.guildInfo{
+  display: inline-flex;
+  align-items: center;
+  padding: 0 15px;
+}
+
+.guildInfo h5{
+  margin: 0;
+  margin-left: 10px;
+  font-size: 1.3em;
+}
+
+.guildInfo img{
+  max-height: 64px;
+  border-radius: 50%;
+}
+
+.stats-wrapper{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.guildIcon {
+  border-radius: 64px;
+  background-color: #111111;
+}
+
+.missing-guild{
+  width: 64px;
+  height: 64px;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  vertical-align: top;
+  border-radius: 50%;
+  color: white;
+}
+
+@media only screen and (max-width: 950px) {
+  .guildInfo img{
+    display: none;
+  }
+}

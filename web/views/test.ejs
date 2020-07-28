@@ -1,0 +1,316 @@
+<%- include("partials/header.ejs") %>
+<div class="content text-center row profile">
+
+    <div class="one-third column">
+
+        <div class="profileCard">
+            <img src="<%-fetchedProfile.displayAvatarURL.replace('.webp', '.png')-%>">
+            <div class="profileInfo">
+                <%-fetchedProfile.tag-%>
+                <% if(["159126685759832065", "583062692596547585"].includes(fetchedProfile.id)) { %>
+                    <span class="tooltip">
+                        <i class="fas fa-check-circle" class=""></i>
+                        <span class="tooltiptext">Owner</span>
+                    </span>
+                    <span class="tooltip">
+                        <i class="fas fa-shield-alt" class=""></i>
+                        <span class="tooltiptext">Moderator</span>
+                    </span>
+                <% } %>
+                <% if(fetchedProfile.settings.statuses.supporter){ %>
+                    <span class="tooltip">
+                        <i class="fas fa-award" class=""></i>
+                        <span class="tooltiptext">Supporter</span>
+                    </span>
+                <% } %>
+            </div>
+            <% if(typeof user !== "undefined" && fetchedProfile.id === user.id){ %>
+                <div class="editProfile">
+                    <button id="editProfile">Edit Profile</button>
+                </div>
+                <div class="ui modal" id="profileModal">
+                    <i class="close icon"></i>
+                    <div class="header">
+                        Edit Profile
+                    </div>
+                    <div class="description scrolling scrollbar content">
+                        <form method="POST" action="/profiles/<%- user.id -%>">
+
+                                <h6>Connections</h6>
+                                <div>
+                                    <label>Twitter</label>
+                                    <div class="mediaPlaceholder"><span> twitter.com/ </span><input type="text" name="socialMedia[twitter]" value="<%- fetchedProfile.settings.socialMedia.twitter -%>"> </div>
+                                </div>
+                                <div>
+                                    <label>Instagram</label>
+                                    <div class="mediaPlaceholder"><span> instagram.com/ </span><input type="text" name="socialMedia[instagram]" value="<%- fetchedProfile.settings.socialMedia.instagram -%>"> </div>
+                                </div>
+                                <div>
+                                    <label>Snapchat</label>
+                                    <div class="mediaPlaceholder"><span> snapchat.com/add/ </span><input type="text" name="socialMedia[snapchat]" value="<%- fetchedProfile.settings.socialMedia.snapchat -%>"> </div>
+                                </div>
+
+                                <div>
+                                    <label>Github</label>
+                                    <div class="mediaPlaceholder"><span> github.com/ </span><input type="text" name="socialMedia[github]" value="<%- fetchedProfile.settings.socialMedia.github -%>"> </div>
+                                </div>
+                                <div>
+                                    <label>Youtube</label>
+                                    <div class="mediaPlaceholder"><span> youtube.com/ </span><input type="text" name="socialMedia[youtube]" value="<%- fetchedProfile.settings.socialMedia.youtube -%>"> </div>
+                                </div>
+                                <div>
+                                    <label>Twitch</label>
+                                    <div class="mediaPlaceholder"><span> twitch.tv/ </span><input type="text" name="socialMedia[twitch]" value="<%- fetchedProfile.settings.socialMedia.twitch -%>"> </div>
+                                </div>
+                                <div>
+                                    <label>
+                                        Description
+                                        <div style="display: block;"><span class=""><a href="https://commonmark.org/help/" target="_blank">Markdown Guide</a></span></div>
+                                    </label>
+                                    <textarea name="profile[description]" id="descTextArea" rows="40"><%-fetchedProfile.settings.description-%></textarea>
+                                </div>
+                        </form>
+                    </div>
+                    <div class="actions">
+                        <div class="modalButton invite apply">Apply</div>
+                    </div>
+                </div>
+                <script>
+                document.getElementById("editProfile").addEventListener("click", () => {
+                $('#profileModal')
+                    .modal({
+                        duration: 200,
+                        selector: {
+                        close: '.close', 
+                        approve: '.apply',
+                        }, 
+                        onApprove : function(){
+                            $("#profileModal form").submit();
+                        }
+                    }).modal('show')
+                });
+                </script>
+            <% } %>
+        </div>
+
+        <!-- Badges and Connections -->
+        <div class="card">
+            <div class="row">
+                <div class="one-half column">
+                    <h6 class="">Badges</h6>
+                    <div class="badges">
+                        <% if(commandLog.length >= 50){ %>
+                            <span class="badgetooltip">
+                                <i class="fas fa-hammer"></i>
+                                <span class="badgetooltiptext">Run 50 commands</span>
+                            </span>
+                        <% } else { %>
+                            <%- fetchedProfile.username -%> has no badges.
+                        <% } %>
+                        <% if(commandLog.length >= 100){ %>
+                            <span class="badgetooltip">
+                                <i class="fas fa-tools"></i>
+                                <span class="badgetooltiptext">Run 100 commands</span>
+                            </span>
+                        <% } %>
+                        <% if(commandLog.length >= 250){ %>
+                            <span class="badgetooltip">
+                                <i class="fas fa-cog"></i>
+                                <span class="badgetooltiptext">Run 250 commands</span>
+                            </span>
+                        <% } %>
+                        <% if(commandLog.length >= 500){ %>
+                            <span class="badgetooltip">
+                                <i class="fas fa-cogs"></i>
+                                <span class="badgetooltiptext">Run 500 commands</span>
+                            </span>
+                        <% } %>
+                    </div>
+                </div>
+                <div class="one-half column">
+                    <h6 class="">Connections</h6>
+                    <div class="badges">
+                        <% if(fetchedProfile.settings.socialMedia.twitter !== null && fetchedProfile.settings.socialMedia.twitter !== ""){ %>
+                        <span class="badgetooltip">
+                            <a href="https://twitter.com/<%- fetchedProfile.settings.socialMedia.twitter -%>" target="_blank"><i class="fab fa-twitter"></i></a>
+                            <span class="badgetooltiptext">Twitter</span>
+                        </span>
+                        <% } %>
+                        <% if(fetchedProfile.settings.socialMedia.instagram !== null && fetchedProfile.settings.socialMedia.instagram !== ""){ %>
+                        <span class="badgetooltip">
+                            <a href="https://instagram.com/<%- fetchedProfile.settings.socialMedia.instagram -%>" target="_blank"><i class="fab fa-instagram"></i></a>
+                            <span class="badgetooltiptext">Instagram</span>
+                        </span>
+                        <% } %>
+                        <% if(fetchedProfile.settings.socialMedia.snapchat !== null && fetchedProfile.settings.socialMedia.snapchat !== ""){ %>
+                        <span class="badgetooltip">
+                            <a href="https://snapchat.com/add/<%- fetchedProfile.settings.socialMedia.snapchat -%>" target="_blank"><i class="fab fa-snapchat"></i></a>
+                            <span class="badgetooltiptext">Snapchat</span>
+                        </span>
+                        <% } %>
+                        <% if(fetchedProfile.settings.socialMedia.github !== null && fetchedProfile.settings.socialMedia.github !== ""){ %>
+                        <span class="badgetooltip">
+                            <a href="https://github.com/<%- fetchedProfile.settings.socialMedia.github -%>" target="_blank"><i class="fab fa-github"></i></a>
+                            <span class="badgetooltiptext">Github</span>
+                        </span>
+                        <% } %>
+                        <% if(fetchedProfile.settings.socialMedia.youtube !== null && fetchedProfile.settings.socialMedia.youtube !== ""){ %>
+                        <span class="badgetooltip">
+                            <a href="https://youtube.com/<%- fetchedProfile.settings.socialMedia.youtube -%>" target="_blank"><i class="fab fa-youtube"></i></a>
+                            <span class="badgetooltiptext">YouTube</span>
+                        </span>
+                        <% } %>
+                        <% if(fetchedProfile.settings.socialMedia.twitch !== null && fetchedProfile.settings.socialMedia.twitch !== ""){ %>
+                        <span class="badgetooltip">
+                            <a href="http://twitch.tv/<%- fetchedProfile.settings.socialMedia.twitch -%>" target="_blank"><i class="fab fa-twitch"></i></a>
+                            <span class="badgetooltiptext">Twitch</span>
+                        </span>
+                        <% } %>
+                        <% if(fetchedProfile.settings.socialMedia.twitch === null && fetchedProfile.settings.socialMedia.instagram === null && fetchedProfile.settings.socialMedia.snapchat === null && fetchedProfile.settings.socialMedia.github === null && fetchedProfile.settings.socialMedia.youtube === null && fetchedProfile.settings.socialMedia.twitter === null){ %>
+                            <%- fetchedProfile.username -%> has no connections.
+                        <% } %>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Profile Desc -->
+        <div class="card">
+            <h6 class="">Description</h6>
+            <span id="profileDesc"></span>
+        </div>
+        
+        <script>
+            $(window).on("load", () => {
+                var desc = `<%- fetchedProfile.settings.description -%>`;
+                var md = window.markdownit();
+                var result = md.render(desc);
+                if(result === "" || result === " "){
+                    result = "<%- fetchedProfile.username -%> hasn't set a description."
+                }
+                console.log(result)
+                document.querySelector("#profileDesc").innerHTML = result;
+            })
+        </script>
+    </div>
+
+    <div class="one-third column">
+        <!-- Guild Stats -->
+        <div class="card">
+            <h6 class=""><i class="fas fa-medal"></i> Guild Stats</h6>
+            <% if(stats.length === 0){ %>
+                <span class=""><%- fetchedProfile.username -%> has no guild stats.</span>
+            <% } %>
+            <% stats.forEach(stat => { %>
+                <div class="stats-wrapper">
+
+                    <!-- Guild Info -->
+                    <div class="guildInfo">
+                        <% if(stat.guild.icon != null){ %>
+                            <img src="<%- stat.guild.icon -%>">
+                        <% } else { %>
+                            <div class="guildIcon">
+                                <div class="missing-guild" id="missingGuildText-<%- stat.guild.id -%>"></div>
+                            </div>
+                            
+                            <script>
+                            $(window).on("load", (e) => {
+                                document.getElementById("missingGuildText-<%- stat.guild.id -%>").innerText = acr("<%- stat.guild.name.replace(/["'"]/g, "\$&").replace(/["`"]/g, "\\$&") -%>");
+                            });
+                            </script>
+                        <% } %>
+                        <h5><%- stat.guild.name -%></h5>
+                    </div>
+                    <!-- Level Progress Ring -->
+                    <div class="level-progress-wrapper">
+                        <svg
+                            class="progress-ring"
+                            width="120"
+                            height="120">
+                            <circle
+                                class="progress-ring__circle"
+                                stroke="#141414"
+                                stroke-width="6"
+                                fill="transparent"
+                                r="32"
+                                cx="60"
+                                cy="60"
+                                --data-percent="100"/>
+                            <circle
+                                class="progress-ring__circle animate__circle"
+                                stroke="#7b2bc0"
+                                stroke-width="6"
+                                fill="transparent"
+                                r="32"
+                                cx="60"
+                                cy="60"
+                                --data-percent="<%- stat.data.progress -%>"/>
+                        </svg>
+                        <div>
+                            <h5><span style="color:#74777a">level</span> <br> <span style="font-weight: 600"><%- stat.data.level -%></span></h5>
+                        </div>
+                    </div>
+
+                </div>
+            <% }) %>
+        </div>
+    </div>
+    
+    <div class="one-third column">
+        <div class="card">
+            <h6 class="stickyTitle"><i class="fas fa-history"></i> Command Log</h6>
+            <ul class="scroll scrollbar commandList">
+            <% commandLog.reverse().slice(0, 100).forEach(c => { %>
+                <li class="command">
+                    <span class="commandName"><%- c.command -%></span>
+                    <span class="commandDate"><%- c.ran.toLocaleDateString(); -%></span>
+                    <span class="commandTime"><%- c.ran -%></span>
+                </li>
+            <% }); %>
+            <% if(commandLog.length === 0){ %>
+                <li class="command">
+                    <span class=""><%- fetchedProfile.username -%> has no command history.</span>
+                </li>
+            </ul>
+            <% } else { %>
+            </ul>
+            <span class="info">Last 100 commands ran<span> 
+            <% } %>
+        
+            <script>
+                let commands = document.querySelectorAll(".commandTime");
+                commands.forEach(e => {
+                    let date = new Date(e.innerHTML);
+                    e.innerHTML = date.toLocaleTimeString();
+                });
+            </script>
+        </div>
+    </div>
+</div>
+
+<script>
+    var circles = document.querySelectorAll('circle');
+    
+    function setPercent(circle) {
+       var radius = circle.r.baseVal.value;
+       var circumference = radius * 2 * Math.PI;
+    
+       circle.style.strokeDasharray = `${circumference} ${circumference}`;
+       circle.style.strokeDashoffset = `${circumference}`;
+    
+       const offset = circumference - parseInt(circle.getAttribute("--data-percent")) / 100 * circumference;
+       circle.style.strokeDashoffset = offset;
+    }
+    
+    circles.forEach(circle => {
+       setPercent(circle);
+    });
+    
+    $(window).on("load", (e) => {
+       circles.forEach(circle => {
+          setPercent(circle);
+       });
+    });
+    </script>
+
+<%- include("partials/footer.ejs") %>

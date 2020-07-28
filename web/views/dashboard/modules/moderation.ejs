@@ -1,0 +1,46 @@
+<%- include("../../partials/header.ejs") %>
+<%- include("../../partials/guildheader.ejs") %>
+<div class="container main">
+    <form method="POST" action="/dashboard/<%-guild.id%>/moderation" id="guildForm">
+
+        <div class="settingWrapper">
+            <div class="settingTitle">
+                <h4>Reports Channel</h4>
+                <p class="info">Choose where reports are logged.</p>
+            </div>
+            <div class="settings">
+                <select data-inital="<%- (guild.settings.channels.report) ? guild.settings.channels.report : null -%>"
+                    name="settings[reportsChannel]">
+                    <option value="null" selected> None </option>
+                    <% channels.forEach(c => { %>
+                    <% if(guild.settings.channels.report !== null && guild.settings.channels.report === c.id){ %>
+                    <option value="<%-c.id%>" selected> <%-c.name%> </option>
+                    <% } else { %>
+                    <option value="<%-c.id%>"> <%-c.name%> </option>
+                    <% } %>
+                    <% }) %>
+                </select>
+            </div>
+        </div>
+
+        <div class="settingWrapper">
+            <div class="settingTitle">
+                <h4>Anti Invite Message</h4>
+                <p class="info">Alert members when thier invites are deleted.</p>
+            </div>
+            <div class="settings">
+                <label class="switch">
+                    <input type="checkbox" name="settings[antiinvite]"
+                        <%-(guild.settings.levelAnnounce == "true") ? "checked" : " "-%>>
+                    <span class="slider round"></span>
+                </label>
+                <input type="checkbox" name="settings[ignore]" style="display: none;" checked>
+            </div>
+        </div>
+
+
+        <button type="submit">Save settings</button>
+
+    </form>
+</div>
+<%- include("../../partials/footer.ejs") %>

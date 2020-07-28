@@ -1,0 +1,79 @@
+<%- include("partials/header.ejs") %>
+
+<div class="content text-center">
+   <div class="guild-title">
+      <img class="guildIcon" src="<%- guild.iconURL.replace('.webp', '.png') -%>">
+      <h3>Leaderboard for <%- guild.name -%></h3>
+   </div>
+   <div class="container">
+      <ul class="exp-wrapper">
+         <% data.forEach((user, i) => { %>
+            <li>
+               <div class="info">
+                  <h4><%- i + 1 -%></h4>
+                  <a href="/profiles/<%- user.id -%>">
+                     <img src="<%- user.avatar -%>">
+                     <h4><%- user.tag -%></h4>
+                  </a>
+               </div>
+               <!-- <div class="level-progress-wrapper" style="background: linear-gradient(90deg, #7b2bc0 0%, #7b2bc0 <%- user.progress -%>%, var(--background-secondary) <%- user.progress -%>%, var(--background-secondary) 100%);"> -->
+               <div class="level-progress-wrapper">
+                  <svg
+                     class="progress-ring"
+                     width="120"
+                     height="120">
+                     <circle
+                        class="progress-ring__circle"
+                        stroke="#141414"
+                        stroke-width="6"
+                        fill="transparent"
+                        r="45"
+                        cx="60"
+                        cy="60"
+                        --data-percent="100"/>
+                     <circle
+                        class="progress-ring__circle animate__circle"
+                        stroke="#7b2bc0"
+                        stroke-width="6"
+                        fill="transparent"
+                        r="45"
+                        cx="60"
+                        cy="60"
+                        --data-percent="<%- user.progress -%>"/>
+                  </svg>
+                  <div>
+                     <h5><span style="color:#74777a">level</span> <br> <span style="font-weight: 600"><%- user.level -%></span></h5>
+                  </div>
+               </div>
+            </li>
+         <% }) %>
+      </ul>
+   </div>
+</div>
+
+<script>
+var circles = document.querySelectorAll('circle');
+
+function setPercent(circle) {
+   var radius = circle.r.baseVal.value;
+   var circumference = radius * 2 * Math.PI;
+
+   circle.style.strokeDasharray = `${circumference} ${circumference}`;
+   circle.style.strokeDashoffset = `${circumference}`;
+
+   const offset = circumference - parseInt(circle.getAttribute("--data-percent")) / 100 * circumference;
+   circle.style.strokeDashoffset = offset;
+}
+
+circles.forEach(circle => {
+   setPercent(circle);
+});
+
+$(window).on("load", (e) => {
+   circles.forEach(circle => {
+      setPercent(circle);
+   });
+});
+</script>
+
+<%- include("partials/footer.ejs") %>

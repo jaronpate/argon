@@ -1,0 +1,60 @@
+.categoryWrapper{
+    padding: 15px;
+    border-radius: 10px;
+    margin-bottom: 35px;
+    background-color: rgba(0, 0, 0, 0.08);
+}
+
+.categoryTitle{
+    text-align: left;
+    display: block;
+    margin-left: 15px;
+    font-weight: bold;
+}
+
+.categoryWrapperSettings{
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-wrap: wrap;
+
+}
+
+.card{
+    background-color: var(--background-tertiary);
+    width: 25%;
+    height: 100%;
+    border-radius: 10px;
+    margin: 0 10px 15px 10px;
+    padding: 10px 15px;
+    display: inline-block;
+    flex: 1 1 30%;
+    /* min-height: 13vh; */
+}
+
+.cardTitle{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 5px 0;
+}
+
+.cardTitle label{
+    cursor: pointer;
+}
+
+.card h5{
+    display: inline;
+    margin: 0;
+    font-weight: bold;
+}
+
+.commandToggle{
+    display: inline-block;
+    float: right;
+}
+
+.commandToggle input{
+    margin: 0;
+}
+

@@ -1,0 +1,95 @@
+<div class="guild-title">
+    <div class="text-center container">
+        <div class="content guildnav">
+            <div class="guildnav-title">
+                <% if (["tickets", "ticket"].includes(page)) { %>
+                    <i class="far fa-arrow-alt-circle-left back"
+                        onclick="location.href='/dashboard/<%-guild.id-%><%-(page === "ticket") ? "/tickets" : ""-%>'"></i>
+                <% } else { %>
+                    <i class="far fa-arrow-alt-circle-left back"
+                        onclick="location.href='/dashboard<%-(typeof module != 'undefined') ? `/${guild.id}` : '' -%>'"></i>
+                <% } %>
+                <% if(guild.iconURL) { %>
+                <img class="guildIcon" src="<%-guild.iconURL.replace('.webp', '.png')-%>">
+                <% } else { %>
+                <div class=" missingGuild"><span id="missingGuildText-<%-guild.id-%>"></span></div>
+                <script>
+                    $(window).on("load", (e) => {
+                        document.getElementById("missingGuildText-<%- guild.id -%>").innerText = acr("<%- guild.name.replace(/["'"]/g, "\$&").replace(/["`"]/g, "\\$&") -%>");
+                });
+                </script>
+                <% } %>
+                <h4><%-guild.name%></h4>
+            </div>
+
+            <div class="guildnav-options">
+                <a href="/dashboard/<%-guild.id-%>"
+                    class="guildnav-item <%- (["modules", "tickets", "ticket"].includes(page)) ? "guildnav-active" : "" -%>">
+                    Modules
+                </a>
+                <a href="/dashboard/<%-guild.id-%>/leaderboard"
+                    class="guildnav-item <%- (page === "leaderboard") ? "guildnav-active" : "" -%>">
+                    Leaderboard
+                </a>
+                <a href="/dashboard/<%-guild.id-%>/commands"
+                    class="guildnav-item <%- (page === "commands") ? "guildnav-active" : "" -%>">
+                    Commands
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<% if(typeof module != "undefined"){ %>
+
+<script>
+    $(window).on("load", () => {
+        var saveDialog = document.getElementById("saveDialog");
+        let inputs = document.getElementsByTagName("input");
+        let selects = document.getElementsByTagName("select");
+        var el = [...inputs, ...selects];
+        var fucku = document.getElementById("roleDropdown");
+        if (el.indexOf(fucku) !== -1) {
+            el.splice(el.indexOf(fucku), 1)
+        }
+        el.forEach(e => {
+            $(e).change(function () {
+                saveDialog.classList.add("shown");
+            });
+        });
+        function resetInputs(inputs, saveDialog) {
+            inputs.forEach(e => {
+                if (e.getAttribute("type") === "text") {
+                    e.value = e.getAttribute("data-inital");
+                } else if (e.getAttribute("type") === "checkbox") {
+                    if (e.getAttribute("data-inital") === "true") {
+                        e.checked = true
+                    }
+                    if (e.getAttribute("data-inital") === "false") {
+                        e.checked = false
+                    }
+                }
+                saveDialog.classList.remove("shown");
+            });
+        }
+        document.querySelector("#cancel").addEventListener("click", (e) => {
+            resetInputs(el, saveDialog);
+        });
+        document.querySelector("#save").addEventListener("click", (e) => {
+            $("#guildForm").submit();
+        });
+    });
+</script>
+<span id="saveDialogWrapper">
+    <div id="saveDialog">
+        <p>
+            Changes made, apply?
+        </p>
+        <div id="saveDialogButtons">
+            <a id="save"><i class="fas fa-check"></i> Accept </a>
+            <a id="cancel"><i class="fas fa-redo"></i> Reset </a>
+        </div>
+    </div>
+</span>
+
+<% } %>

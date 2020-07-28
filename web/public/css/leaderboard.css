@@ -1,0 +1,93 @@
+.exp-wrapper{
+   list-style-type: none;
+}
+
+.exp-wrapper li{
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+   margin: 15px 0;
+   padding: 0 10px;
+   background-color: var(--background-tertiary);
+   border-radius: 15px;
+}
+
+.info{
+   display: flex;
+   align-items: center;
+}
+
+.info a{
+   display: flex;
+   align-items: center;
+   transition: color 0.1s;
+   transition-timing-function: ease-in;
+}
+
+.info a:hover{
+   color: var(--brand-primary)
+}
+
+.info a{
+   text-decoration: none;
+   color: white;
+}
+
+.exp-wrapper img{
+   max-height: 64px;
+   border-radius: 50%;
+}
+
+.exp-wrapper img, .exp-wrapper h4, .exp-wrapper > div{
+   display: inline;
+   margin: 0 10px;
+}
+
+.level-progress-wrapper{
+   float: right;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   height: 100%;
+   position: relative;
+}
+
+.level-progress-wrapper div{
+   position: absolute;
+}
+
+.level-progress-wrapper h5{
+   text-transform: uppercase;
+   margin: 0;
+   font-size: 1.1em;
+}
+
+.progress-ring__circle {
+   transform: rotate(-90deg);
+   transform-origin: 50% 50%;
+   stroke-linecap: round;
+}
+
+.animate__circle{
+   transition: 0.65s stroke-dashoffset ease-in-out;
+}
+
+.guild-title{
+   width: 100%;
+   background-color: var(--background-secondary);
+   padding: 15px 0;
+}
+
+.guild-title h3{
+   margin: 0 15px;
+}
+
+.guildIcon{
+   border-radius: 64px;
+   max-height: 64px;
+}
+
+.guild-title img, .guild-title h3{
+   display: inline;
+   vertical-align: middle;
+}

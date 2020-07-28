@@ -1,0 +1,19 @@
+<%- include("../../partials/header.ejs") %>
+<%- include("../../partials/guildheader.ejs") %>
+
+<div class="container main">
+    <form method="POST" action="/dashboard/<%-guild.id%>/general" id="guildForm">
+        <div class="settingWrapper">
+            <div class="settingTitle">
+                <h4>Prefix</h4>
+                <p class="info">Change the prefix for your server.</p>
+            </div>
+            <div class="settings">
+                <input type="text" name="settings[prefix]" data-inital="<%-guild ? guild.settings.prefix : "$"-%>"
+                    value="<%-guild ? guild.settings.prefix : "$"-%>">
+            </div>
+        </div>
+        <button type="submit">Save settings</button>
+    </form>
+</div>
+<%- include("../../partials/footer.ejs") %>
