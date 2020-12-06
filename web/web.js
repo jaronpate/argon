@@ -20,7 +20,7 @@ const http = require("http"),
 /**
  * Load environment variables from .env file, where API keys and passwords are configured.
  */
-dotenv.config({ path: 'dotenv' });
+dotenv.config();
 
 const clientID = process.env.client_id;
 const redirectUri = process.env.redirectUri;
@@ -158,6 +158,9 @@ app.get("/leaderboards/:id", async (req, res) => {
     }
     // Fetch leaderboard
     let leaderboard = await fetch({ type: "guilds", id: req.params.id, action: "leaderboard" });
+    if (!leaderboard) {
+        return res.redirect('/')
+    }
     // Check for oauth token
     if (token) {
         let user = await oauth.getUser(token).catch(err => res.redirect(authURL));

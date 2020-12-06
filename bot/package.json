@@ -1,5 +1,5 @@
 {
-   "name": "argon1",
+   "name": "argon-bot",
    "version": "1.0.0",
    "main": "src/Sharding.js",
    "license": "MIT",

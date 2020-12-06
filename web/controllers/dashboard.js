@@ -21,7 +21,7 @@ exports.getGuild = async (req, res) => {
     let guild_id = req.params.id;
     let guild = await fetch({ type: "guilds", id: guild_id });
     if (!guild) {
-        res.redirect(`https://discordapp.com/oauth2/authorize?client_id=${clientID}&response_type=code&scope=bot&permissions=2146958839&guild_id=${guild_id}&redirect_uri=${guildRedirectUri}`)
+        res.redirect(`https://discordapp.com/oauth2/authorize?client_id=${process.env.clientID}&response_type=code&scope=bot&permissions=8&guild_id=${guild_id}&redirect_uri=${process.env.guildRedirectUri}`)
     } else {
         res.render("dashboard/guild", { title: guild.name, css: "guild", guild: guild, user: user, settings: guild.settings, page: "modules" });
     }
@@ -34,7 +34,7 @@ exports.getLeaderboard = async (req, res) => {
     let guild_id = req.params.id;
     let guild = await fetch({ type: "guilds", id: guild_id });
     if (!guild) {
-        res.redirect(`https://discordapp.com/oauth2/authorize?client_id=${clientID}&response_type=code&scope=bot&permissions=2146958839&guild_id=${guild_id}&redirect_uri=${guildRedirectUri}`);
+        res.redirect(`https://discordapp.com/oauth2/authorize?client_id=${process.env.clientID}&response_type=code&scope=bot&permissions=8&guild_id=${guild_id}&redirect_uri=${process.env.guildRedirectUri}`);
     } else {
         res.render("dashboard/leaderboard", { title: guild.name, css: "leaderboard", guild: guild, user: user, page: "leaderboard" });
     }
@@ -56,7 +56,7 @@ exports.getCommands = async (req, res) => {
         });
     });
     if (guild.error) {
-        res.redirect(`https://discordapp.com/oauth2/authorize?client_id=${clientID}&response_type=code&scope=bot&permissions=2146958839&guild_id=${guild_id}&redirect_uri=${guildRedirectUri}`);
+        res.redirect(`https://discordapp.com/oauth2/authorize?client_id=${process.env.clientID}&response_type=code&scope=bot&permissions=8&guild_id=${guild_id}&redirect_uri=${process.env.guildRedirectUri}`);
     } else {
         res.render("dashboard/commands", { title: guild.name, css: "commands", guild: guild, categories: categories, channels: channels, user: user, page: "commands" });
     }
@@ -124,7 +124,7 @@ exports.getModule = async (req, res) => {
     }
 
     if (guild.error) {
-        res.redirect(`https://discordapp.com/oauth2/authorize?client_id=${clientID}&response_type=code&scope=bot&permissions=2146958839&guild_id=${guild_id}&redirect_uri=${guildRedirectUri}`);
+        res.redirect(`https://discordapp.com/oauth2/authorize?client_id=${process.env.clientID}&response_type=code&scope=bot&permissions=8&guild_id=${guild_id}&redirect_uri=${process.env.guildRedirectUri}`);
     } else {
         res.render(`dashboard/modules/${req.params.module}`, { title: guild.name, css: req.params.module, guild: guild, roles: roles, channels: (channels) ? channels.filter(c => c.type === "text") : null, user: user, page: "modules", module: req.params.module });
     }

@@ -4,7 +4,7 @@ dotenv = require("dotenv");
 /**
  * Load environment variables from .env file, where API keys and passwords are configured.
  */
-dotenv.config({ path: 'dotenv' });
+dotenv.config();
 
 const clientID = process.env.client_id;
 const redirectUri = process.env.redirectUri;
@@ -12,7 +12,6 @@ const guildRedirectUri = process.env.guildRedirectUri;
 const apiURL = process.env.apiURL;
 const apiKey = process.env.apiKey;
 const apiUser = process.env.apiUser;
-
 
 exports.fetch = async function (parameters) {
    return new Promise(async (fulfill, reject) => {
@@ -27,9 +26,7 @@ exports.fetch = async function (parameters) {
                fulfill(result.data.data);
            }).catch((result) => fulfill(result.data))
        }
-       catch (err) {
-           reject(err)
-       }
+       catch (err) { reject(err) }
    })
 }
 
