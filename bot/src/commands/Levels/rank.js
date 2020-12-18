@@ -4,7 +4,7 @@ const { Command } = require('klasa');
 const fetch = require('node-fetch');
 const d3 = require('d3-format');
 const toPercentage = (current, total) => Math.round(current / total * 515);
-const format = (number) => number > 999 ? format('.3s')(number) : number;
+const format = (number) => number > 999 ? d3.format('.3s')(number) : number;
 
 module.exports = class extends Command {
    constructor(...args) {
