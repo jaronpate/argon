@@ -7,7 +7,7 @@
     "lib": "lib"
   },
   "dependencies": {
-    "axios": "^0.19.1",
+    "axios": "^0.21.1",
     "body-parser": "^1.19.0",
     "cookie-parser": "^1.4.4",
     "cookies": "^0.7.3",
