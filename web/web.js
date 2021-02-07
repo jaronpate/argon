@@ -15,7 +15,8 @@ const http = require("http"),
     mongoose = require('mongoose'),
     session = require('express-session'),
     {fetch, update} = require('./helpers'),
-    dashboard = require('./controllers/dashboard')
+    dashboard = require('./controllers/dashboard'),
+    path = require("path")
 
 /**
  * Load environment variables from .env file, where API keys and passwords are configured.
@@ -40,7 +41,7 @@ const app = express();
 const server = http.Server(app);
 
 app.set("view engine", "ejs");
-app.use('/assets', express.static(__dirname + '/public'));
+app.use('/assets', express.static(path.join(process.env.PWD || __dirname + '/public')));
 app.use(cookieParser());
 app.use(cookies.express(["normies big gay"]));
 app.use(bodyParser.json());
@@ -55,19 +56,14 @@ app.use(session({
     cookie: { secure: true }
 }));
 
-if (process.env.NODE_ENV === 'production') {
-    app.use((req, res, next) => {
-        if (req.header('x-forwarded-proto') !== 'https')
-            res.redirect(`https://${req.header('host')}${req.url}`)
-        else
-            next()
-    })
-}
-
-app.use((req, res, next) => {
-    res.set('Content-Language', 'en-us');
-    next();
-});
+// if (process.env.NODE_ENV === 'production') {
+//     app.use((req, res, next) => {
+//         if (req.header('x-forwarded-proto') !== 'https')
+//             res.redirect(`https://${req.header('host')}${req.url}`)
+//         else
+//             next()
+//     })
+// }
 
 // RANK CARD COLOR MIDDLEWARE
 
