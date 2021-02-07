@@ -8,11 +8,11 @@ exports.tokens = {
 }
 
 exports.emojis = {
-   success: '<:success:695674669449216090>',
-   error: '<:error:695675079899742259>',
-   loading: '<a:loading:695675909943984219>',
-   rankUp: '<:up:695688887779196990>',
-   folder: '<:folder:719235353562710077>',
+   success: '<:check:807923304979103754>',
+   error: '<:xmark:807923304845148170>',
+   loading: '<a:loading:807923304891285524>',
+   rankUp: '<:rankup:807923899119566849>',
+   folder: '📁',
    ticketOpen: '📩',
    ticketLock: '🔒',
    ticketUnlock: '🔓',
