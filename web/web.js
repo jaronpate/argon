@@ -41,7 +41,7 @@ const app = express();
 const server = http.Server(app);
 
 app.set("view engine", "ejs");
-app.use('/assets', express.static(path.join(process.env.PWD || __dirname + '/public')));
+app.use('/assets', express.static(path.join(__dirname + '/public')));
 app.use(cookieParser());
 app.use(cookies.express(["normies big gay"]));
 app.use(bodyParser.json());
