@@ -12,6 +12,7 @@ const http = require("http"),
     dotenv = require("dotenv"),
     querystring = require('querystring'),
     loggedCommands = require('./schemas/loggedCommands'),
+    leaderboards = require('./schemas/leaderboard'),
     mongoose = require('mongoose'),
     session = require('express-session'),
     {fetch, update} = require('./helpers'),
@@ -145,15 +146,27 @@ app.post("/profiles/:id", loggedIn, async (req, res) => {
 // Leaderboard(s)
 // ===============
 
-app.get("/leaderboards/:id", async (req, res) => {
-    let guild = await fetch({ type: "guilds", id: req.params.id });
+app.get("/l/:vanity", (req, res, next) => {
+    leaderboards.findOne({vanity: req.params.vanity}, (error, leaderboard) => {
+        if (error){ return res.redirect('/'); }
+        if (!leaderboard) { return missing(req, res) }
+        getLeaderboard(req, res, next, leaderboard.guild);
+    })
+})
+
+app.get("/leaderboards/:id", async (req, res ,next) => {
+    getLeaderboard(req, res, next, req.params.id)    
+});
+
+async function getLeaderboard(req, res, next, guildId){
+    let guild = await fetch({ type: "guilds", id: guildId });
     let token = req.cookies.get("access_token");
     if (guild.error) {
         console.log(guild.error);
         return res.redirect(`/`);
     }
     // Fetch leaderboard
-    let leaderboard = await fetch({ type: "guilds", id: req.params.id, action: "leaderboard" });
+    let leaderboard = await fetch({ type: "guilds", id: guildId, action: "leaderboard" });
     if (!leaderboard) {
         return res.redirect('/')
     }
@@ -164,7 +177,7 @@ app.get("/leaderboards/:id", async (req, res) => {
     } else {
         res.render("leaderboard", { title: `Leaderboard for ${guild.name}`, css: "leaderboard", guild: guild, data: leaderboard, authURL: authURL });
     }
-});
+}
 
 // ================
 // Dashboard Routes
@@ -175,6 +188,8 @@ app.get("/dashboard", loggedIn, dashboard.index);
 app.get("/dashboard/:id", loggedIn, authorized, dashboard.getGuild);
 
 app.get("/dashboard/:id/leaderboard", loggedIn, authorized, dashboard.getLeaderboard);
+
+app.post("/dashboard/:id/leaderboard", loggedIn, authorized, dashboard.postLeaderboard);
 
 app.get("/dashboard/:id/commands", loggedIn, authorized, dashboard.getCommands);
 
@@ -243,7 +258,9 @@ app.get("/logout", (req, res) => {
 // 404
 // ===
 
-app.get("*", async function notFound(req, res) {
+app.get("*", missing);
+
+async function missing(req, res){
     let token = req.cookies.get("access_token");
     if (token) {
         let user = await oauth.getUser(token).catch(err => res.redirect(authURL))
@@ -251,7 +268,7 @@ app.get("*", async function notFound(req, res) {
     } else {
         res.render("404", { title: "Not Found", css: "404", authURL: authURL });
     }
-});
+}
 
 // PAYMENT/CHECKOUT
 app.post("/subscriptions/update", (req, res) => {

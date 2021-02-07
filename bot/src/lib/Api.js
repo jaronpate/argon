@@ -223,8 +223,9 @@ class Api {
          if (guild === undefined) {
             return reply(null, res, "No guild found.", 404);
          }
+         console.log(req.body.settings)
          let settings = req.body.settings;
-         await guild.settings.update(settings, { force: true, arrayAction: (settings.roles || settings.disabledCommands) ? 'overwrite' : 'auto' })
+         await guild.settings.update(settings, { force: true, arrayAction: (settings.roles || settings.disabledCommands || null) ? 'overwrite' : 'auto' })
             .then(async result => {
                await guild.settings.sync();
                return reply(result, res);

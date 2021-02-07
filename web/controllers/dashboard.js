@@ -1,7 +1,7 @@
-const { fetch, update } = require('../helpers')
+const { fetch, update } = require('../helpers');
+const leaderboards = require('../schemas/leaderboard');
 DiscordOauth2 = require("discord-oauth2"),
-    oauth = new DiscordOauth2()
-
+oauth = new DiscordOauth2()
 // ================
 // Dashboard Routes
 // ================
@@ -36,9 +36,19 @@ exports.getLeaderboard = async (req, res) => {
     if (!guild) {
         res.redirect(`https://discordapp.com/oauth2/authorize?client_id=${process.env.clientID}&response_type=code&scope=bot&permissions=8&guild_id=${guild_id}&redirect_uri=${process.env.guildRedirectUri}`);
     } else {
-        res.render("dashboard/leaderboard", { title: guild.name, css: "leaderboard", guild: guild, user: user, page: "leaderboard" });
+        leaderboards.findOne({guild: req.params.id}, (error, leaderboard) => {
+            console.log(error)
+            res.render("dashboard/leaderboard", { title: guild.name, css: "leaderboard", guild: guild, leaderboard: leaderboard, user: user, page: "leaderboard" });
+        })
     }
 };
+
+exports.postLeaderboard = (req, res) => {
+    leaderboards.findOneAndUpdate({guild: req.params.id}, {guild: req.params.id, vanity: req.body.settings.vanity}, {upsert: true}, (error, leaderboard) => {
+        console.log(leaderboard);
+        res.redirect(`/dashboard/${req.params.id}/leaderboard`);
+    });
+}
 
 // GET
 // /dashboard/:id/commands
