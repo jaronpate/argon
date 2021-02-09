@@ -5,7 +5,7 @@ module.exports = class extends Command {
    constructor(...args) {
       super(...args, {
          guarded: true,
-         description: `Generates a link with the required permissions for you to invite the bot with.`
+         description: `Generates a link for you to invite the bot with.`
       });
    }
 
