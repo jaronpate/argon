@@ -40,5 +40,12 @@ exports.options = {
    providers: { default: "mongodb" },
    pieceDefaults: {
       commands: { runIn: ['text'], deletable: false, quotedStringSupport: true, cooldown: 3.5 },
+   },
+   presence: {
+      activity: {
+         name: 'argon.wtf',
+         type: 'STREAMING',
+         url: 'https://www.twitch.tv/bobross'
+      }
    }
 }
