@@ -6,7 +6,7 @@ module.exports = class extends Command {
       super(...args, {
          enabled: true,
          runIn: ['text'],
-         permLevel: 0,
+         permissionLevel: 0,
          requiredPermissions: ['EMBED_LINKS'],
          description: 'Gives you a random answer to a question.',
          usage: '<question:string>',
