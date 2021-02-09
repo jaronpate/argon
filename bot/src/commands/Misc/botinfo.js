@@ -16,7 +16,7 @@ module.exports = class extends Command {
          .setColor(this.client.config.defaultColor)
          .setThumbnail(this.client.user.displayAvatarURL({ dynamic: true, size: 2048 }).replace('.webp', '.png'))
          .addField("🤖 General", `• Created On: ${createdTime}\n• Default Prefix: ${this.client.config.prefix}\n• Website: [argon.wtf](https://www.argon.wtf)`)
-         .addField("📄 Support", `• Bot Owner(s): ${Array.from(this.client.owners).map(owner => owner.tag).join(', ')}\n• Support: [Discord Server](https://discord.gg/zVBQNSm)`)
+         .addField("📄 Support", `• Bot Owner(s): ${Array.from(this.client.owners).map(owner => owner.tag).join(', ')}\n• Support: [Discord Server](https://discord.gg/V2BQpdK6pr)`)
          .setFooter(`${msg.author.username}`, msg.author.displayAvatarURL({ dynamic: true, size: 2048 }).replace('.webp', '.png'))
          .setTimestamp(Date.now());
       return msg.sendMessage(embed)
