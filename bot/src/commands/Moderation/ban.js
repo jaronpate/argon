@@ -5,6 +5,7 @@ module.exports = class extends Command {
       super(...args, {
          description: language => language.get('COMMAND_BAN_DESCRIPTION'),
          requiredPermissions: ['BAN_MEMBERS'],
+         permissionLevel: 4,
          usage: '<member:member> [reason:string] [...]',
          usageDelim: ' '
       })
@@ -17,7 +18,7 @@ module.exports = class extends Command {
       } else if (member.bannable === false) {
          return msg.sendMessage(`${this.client.config.error} I cannot ban that user.`);
       }
-      // await msg.guild.members.ban(member, { reason });
+      await msg.guild.members.ban(member, { reason });
       if (msg.guild.settings.get('channels.modlog')) {
          new this.client.modlog(msg.guild).setType('ban').setModerator(msg.member).setUser(member).setReason(reason).send();
       }
