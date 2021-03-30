@@ -7,7 +7,7 @@
     "lib": "lib"
   },
   "dependencies": {
-    "axios": "^0.19.1",
+    "axios": "^0.21.1",
     "body-parser": "^1.19.0",
     "cookie-parser": "^1.4.4",
     "cookies": "^0.7.3",
@@ -20,7 +20,7 @@
     "express-session": "^1.17.0",
     "js-base64": "^2.5.1",
     "method-override": "^3.0.0",
-    "mongoose": "^5.8.9",
+    "mongoose": "^5.12.2",
     "query-string": "^6.10.1",
     "querystring": "^0.2.0"
   },

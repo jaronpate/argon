@@ -36,7 +36,7 @@ mongoose.connect(process.env.db, { useNewUrlParser: true, useUnifiedTopology: tr
 })
 
 const client_secret = process.env.client_secret;
-const authURL = `https://discordapp.com/api/oauth2/authorize?client_id=${clientID}&redirect_uri=${encodeURIComponent(process.env.redirectUri)}&response_type=code&scope=identify%20guilds`;
+const authURL = `https://discordapp.com/api/oauth2/authorize?client_id=${clientID}&redirect_uri=${encodeURIComponent(process.env.redirectUri)}&response_type=code&scope=identify%20guilds&prompt=none`;
 
 const app = express();
 const server = http.Server(app);

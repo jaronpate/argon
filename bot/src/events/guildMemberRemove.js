@@ -13,8 +13,8 @@ module.exports = class extends Event {
       if (!member.guild.me.permissions.has("MANAGE_WEBHOOKS")) return;
 
       const embed = new MessageEmbed()
-         .setTitle('Member Joined')
-         .setColor(this.client.config.colors.green)
+         .setTitle('Member Left')
+         .setColor(this.client.config.colors.red)
          .setAuthor(`${member.user.tag} ${member && member.nick ? `(${member.nick})` : ''}`, await member.user.getAvatar())
          .addField(`IDs`, util.codeBlock('ini', `User = ${member.user.id}`))
          .setTimestamp();
