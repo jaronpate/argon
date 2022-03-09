@@ -3,7 +3,7 @@ const { ShardingManager } = require('discord.js');
 const { tokens, options } = require('./config');
 const Api = require('./lib/Api')
 
-const manager = new ShardingManager('./src/Argon.js', {
+const manager = new ShardingManager('./Argon.js', {
    token: tokens.bot
 });
 
