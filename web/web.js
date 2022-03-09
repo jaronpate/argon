@@ -36,7 +36,7 @@ mongoose.connect(process.env.db, { useNewUrlParser: true, useUnifiedTopology: tr
 })
 
 const client_secret = process.env.client_secret;
-const authURL = `https://discordapp.com/api/oauth2/authorize?client_id=${clientID}&redirect_uri=${encodeURIComponent(process.env.redirectUri)}&response_type=code&scope=identify%20guilds&prompt=none`;
+const authURL = `https://discord.com/api/oauth2/authorize?client_id=${clientID}&redirect_uri=${encodeURIComponent(process.env.redirectUri)}&response_type=code&scope=identify%20guilds`;
 
 const app = express();
 const server = http.Server(app);
@@ -44,7 +44,7 @@ const server = http.Server(app);
 app.set("view engine", "ejs");
 app.use('/assets', express.static(path.join(__dirname + '/public')));
 app.use(cookieParser());
-app.use(cookies.express(["normies big gay"]));
+app.use(cookies.express(["totallylegit"]));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(expressSanitizer());
@@ -155,18 +155,18 @@ app.get("/l/:vanity", (req, res, next) => {
 })
 
 app.get("/leaderboards/:id", async (req, res ,next) => {
-    getLeaderboard(req, res, next, req.params.id)    
+    getLeaderboard(req, res, next, req.params.id)
 });
 
 async function getLeaderboard(req, res, next, guildId){
     let guild = await fetch({ type: "guilds", id: guildId });
     let token = req.cookies.get("access_token");
-    if (guild.error) {
-        console.log(guild.error);
+    if (!guild || guild.error) {
         return res.redirect(`/`);
     }
     // Fetch leaderboard
     let leaderboard = await fetch({ type: "guilds", id: guildId, action: "leaderboard" });
+    console.log(leaderboard)
     if (!leaderboard) {
         return res.redirect('/')
     }

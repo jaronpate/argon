@@ -1,8 +1,10 @@
-s.dash {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+
+.dash{
+  height: 80%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* overflow: auto; */
 }
 
 .guildIcon::selection, #guildIcons li a::selection, .missingGuild::selection {
@@ -33,15 +35,13 @@ s.dash {
   opacity: 0.85;
 }
 
-.container ul {
-  display: inline;
-  list-style: none;
+#guildIcons {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
 }
 
-.container ul li {
-  display: inline;
-  margin: 0 10px;
-}
 /* 
 .misssing-guild {
   position: relative;
@@ -52,6 +52,7 @@ s.dash {
 .tooltip {
   position: relative;
   display: block;
+  margin: 0 10px;
 }
 
 .tooltip a {
@@ -91,12 +92,4 @@ s.dash {
 /* Show the tooltip text when you mouse over the tooltip container */
 .tooltip:hover .tooltiptext {
   visibility: visible;
-}
-
-.dash{
-  height: 80%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  overflow: auto;
 }

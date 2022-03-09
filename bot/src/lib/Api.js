@@ -23,7 +23,7 @@ const reply = (data, res, error = undefined, status = 200) => {
 
 class Api {
    constructor(client) {
-      const apikey = "NTgzMDYyNjkyNTk2NTQ3NTg1OjE1OTEyNjY4NTc1OTgzMjA2NQ"
+      const apikey = process.env.botToken
 
       app.use(bodyParser.json());
       app.use(bodyParser.urlencoded({ extended: true }));
@@ -32,7 +32,7 @@ class Api {
          if (!req.headers.authorization) {
             return reply(null, res, "API token missing.", 401)
          } else if (req.headers.authorization !== `${apikey}`) {
-            return reply(null, res, "API token missing.", 401)
+            return reply(null, res, "API token incorrect.", 401)
          } else if (req.headers.authorization === `${apikey}`) {
             next();
          }
@@ -130,6 +130,7 @@ class Api {
             delete d.member;
             delete d.exp;
          });
+         console.log(filteredData)
          reply(filteredData, res);
       });
 

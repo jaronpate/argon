@@ -20,8 +20,10 @@ module.exports = class extends Command {
       await msg.delete();
       if (channel.type !== "text") { return }
       let wh = await channel.createWebhook(this.client.user.username, {
-         avatar: this.client.user.displayAvatarURL(),
-         reason: 'Logs'
+         avatar: this.client.user.displayAvatarURL().replace('.webp', '.png'),
+         reason: 'Logs',
+         type: 3,
+         applicationId: this.client.user.id
       })
       msg.guild.settings.update('channels.logs', wh.id)
       msg.guild.settings.sync()

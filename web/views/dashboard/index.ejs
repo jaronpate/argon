@@ -19,12 +19,12 @@
 </script>
 
 <div class="content container dash text-center">
-    <ul id="guildIcons">
+    <div id="guildIcons">
         <% let guildSize = 0; %>
         <% for(let i = 0; i < guilds.length; i++) { %>
             <% if(guilds[i].owner || (guilds[i].permissions & 0x20) == 0x20){ %>
                 <% guildSize++ %>
-                <li class="tooltip">
+                <div class="tooltip">
                     <a draggable="false" href="/dashboard/<%-guilds[i].id%>">
                         <% if(guilds[i].icon !== null){ %>
                         <img class="guildIcon" draggable="false" src="https://cdn.discordapp.com/icons/<%-guilds[i].id%>/<%-guilds[i].icon%>?size=2048">
@@ -38,12 +38,12 @@
                         <% } %>
                         <span class="tooltiptext"><%-guilds[i].name%></span>
                     </a>
-                </li>
+                </div>
             <% } %> 
         <% } %>
         <% if(guildSize === 0) { %>
             <p>You don't have any guilds mate</p>
         <% } %>
-    </ul>
+    </div>
 </div>
 <%- include("../partials/footer.ejs") %>
