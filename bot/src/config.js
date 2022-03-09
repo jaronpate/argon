@@ -1,5 +1,5 @@
 exports.owners = ['159126685759832065']
-exports.invite = 'https://discord.gg/uAYhzvb'
+exports.invite = 'https://discord.gg/V2BQpdK6pr'
 exports.db = process.env.botDatabase
 exports.prefix = '$'
 
