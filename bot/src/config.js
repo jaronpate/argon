@@ -43,7 +43,7 @@ exports.options = {
    },
    presence: {
       activity: {
-         name: 'argon.wtf',
+         name: 'argon.hat.fish',
          type: 'STREAMING',
          url: 'https://www.twitch.tv/bobross'
       }
