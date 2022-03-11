@@ -87,7 +87,23 @@
 
 h1{
     font-weight: 600;
-    text-transform: capitalize;
+    /* text-transform: capitalize; */
+}
+
+.row{
+    margin-bottom: 75px !important;
+}
+
+@media screen and (max-width: 810px) {
+    .row {
+        flex-direction: column;
+    }
+    .row:nth-child(odd){
+        flex-direction: column-reverse !important;
+    }
+    .skew, .skew-alt{
+        transform: none !important;
+    }
 }
 
 .skew{
