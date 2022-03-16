@@ -20,7 +20,7 @@
             <td><a href="/dashboard/<%-guild.id-%>/tickets/<%-t.id-%>"><%-t.id-%></a></td>
             <td><%-t.tag-%></td>
             <!-- <td><%-t.notes ? t.notes : "None"-%></td> -->
-            <td><%-t.log.reverse()[1] ? t.log.reverse()[1].content.substring(0, 45) + "..." : "None"-%></td>
+            <td><%-(t.log && t.log.reverse()[1]) ? t.log.reverse()[1].content.substring(0, 45) + "..." : "None"-%></td>
             <td><%-t.log ? `${t.log.length} messages` : "None"-%></td>
          </tr>
          <% }) %>
